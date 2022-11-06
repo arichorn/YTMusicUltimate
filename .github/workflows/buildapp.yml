@@ -67,7 +67,7 @@ jobs:
       - name: Download iOS 16.1 SDK
         if: steps.SDK.outputs.cache-hit != 'true'
         run: |
-          svn checkout -q https://github.com/xybp888/iOS-SDKS/trunk/iPhoneOS16.1.sdk
+          svn checkout -q https://github.com/arichorn/sdks/trunk/iPhoneOS16.1.sdk
           mv *.sdk $THEOS/sdks
         env:
           THEOS: ${{ github.workspace }}/theos
