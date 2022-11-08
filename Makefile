@@ -1,5 +1,5 @@
-TARGET = iphone:clang:16.1:12.1.2
-THEOS_DEVICE_IP = 192.168.2.4
+TARGET = iphone:clang:16.1:13.0
+THEOS_DEVICE_IP = localhost -p 2222
 YTMusicUltimate_USE_FLEX = 0
 YTMusicUltimate_USE_FISHHOOK = 0
 ARCHS = arm64
