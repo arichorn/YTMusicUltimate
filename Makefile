@@ -1,12 +1,10 @@
-TARGET = iphone:clang:16.1:13.0
 THEOS_DEVICE_IP = localhost -p 2222
-YTMusicUltimate_USE_FLEX = 0
-YTMusicUltimate_USE_FISHHOOK = 0
 ARCHS = arm64
 MODULES = jailed
 FINALPACKAGE = 1
 CODESIGN_IPA = 0
 INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
+TARGET = iphone:clang:16.1:13.0
 PACKAGE_VERSION = 1.2.6
 
 include $(THEOS)/makefiles/common.mk
