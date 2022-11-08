@@ -1,7 +1,6 @@
-THEOS_DEVICE_IP = localhost -p 2222
 ARCHS = arm64
+THEOS_DEVICE_IP = localhost -p 2222
 MODULES = jailed
-FINALPACKAGE = 1
 CODESIGN_IPA = 0
 INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
 TARGET = iphone:clang:16.1:13.0
