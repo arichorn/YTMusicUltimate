@@ -6,6 +6,7 @@ ifeq ($(SIDELOADED),1)
 MODULES = jailed
 DISPLAY_NAME = YouTube Music
 BUNDLE_ID = com.google.ios.youtubemusic
+INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
 CODESIGN_IPA = 0
 
 YTMusicUltimate_IPA = ./tmp/Payload/YouTubeMusic.app
