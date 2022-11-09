@@ -9,6 +9,7 @@ BUNDLE_ID = com.google.ios.youtubemusic
 INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
 CODESIGN_IPA = 0
 
+YTMusicUltimate_FILES = Source/AVSwitching.xm Source/BackgroundPlayback.xm Source/CarPlay.xm Source/Cast.xm Source/Colours.xm Source/PlaybackRate.xm Source/PremiumStatus.xm Source/RemoveAds.xm Source/SelectableLyrics.xm Source/Settings.xm Source/Sideloading.xm
 YTMusicUltimate_IPA = ./tmp/Payload/YouTubeMusic.app
 YTMusicUltimate_FRAMEWORKS = UIKit Security Foundation CoreGraphics
 endif
