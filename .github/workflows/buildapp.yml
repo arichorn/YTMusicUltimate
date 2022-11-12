@@ -1,4 +1,5 @@
 # Original idea by @ISnackable. Thanks to him for handling the hardest parts!
+# https://github.com/ISnackable/CercubePlus/blob/main/.github/workflows/Build.yml
 
 name: Build and Release YTMusicUltimate IPA
 
@@ -20,9 +21,19 @@ on:
         default: ""
         required: true
         type: string
+      bundle_id:
+        description: "Modify the bundle ID. Not recommended"
+        default: "com.google.ios.youtubemusic"
+        required: true
+        type: string
+      app_name:
+        description: "Modify the name of the app on the Home Screen. Not recommended"
+        default: "YouTube Music"
+        required: true
+        type: string
       create_release:
         description: "Create a draft release"
-        default: false
+        default: true
         required: false
         type: boolean
   
@@ -97,17 +108,25 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
           YOUTUBEMUSIC_URL: ${{ inputs.decrypted_youtubemusic_url }}
 
-      - name: Build Package
+      - name: Fix compiling & Build Package
         id: build_package
         run: |
+          (echo 'THEOS_IGNORE_PARALLEL_BUILDING_NOTICE = yes' >> ~/.theosrc)
           cd ${{ github.workspace }}/main
+          sed -i '' "12s#.*#BUNDLE_ID = ${{ env.BUNDLE_ID }}#g" Makefile
+          sed -i '' "11s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile
           make package FINALPACKAGE=1 SIDELOADED=1
           (mv "packages/$(ls -t packages | head -n1)" "packages/YTMusicUltimate_${{ env.YOUTUBEMUSIC_VERSION  }}_${{ env.YTMUSICULTIMATE_VERSION }}.ipa")
-          echo "::set-output name=package::$(ls -t packages | head -n1)"
+          echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
+          echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
+          echo -e "==> \033[1mBundle ID: ${{ env.BUNDLE_ID }}\033[0m"  
+          
         env:
           THEOS: ${{ github.workspace }}/theos
           YTMUSICULTIMATE_VERSION: ${{ inputs.ytmusicultimate_version }}
           YOUTUBEMUSIC_VERSION: ${{ inputs.youtubemusic_version }}
+          BUNDLE_ID: ${{ inputs.bundle_id }}
+          APP_NAME: ${{ inputs.app_name }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
@@ -120,28 +139,15 @@ jobs:
           if-no-files-found: error
 
       - name: Create Release
-        if: ${{ inputs.create_release }}
         id: create_release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v0.1.14
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           YTMUSICULTIMATE_VERSION: ${{ inputs.ytmusicultimate_version }}
           YOUTUBEMUSIC_VERSION: ${{ inputs.youtubemusic_version }}
+          DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ env.YOUTUBEMUSIC_VERSION }}-${{ env.YTMUSICULTIMATE_VERSION }}-(${{ github.run_number }})
-          release_name: v${{ env.YOUTUBEMUSIC_VERSION }}-${{ env.YTMUSICULTIMATE_VERSION }}-(${{ github.run_number }})
-          draft: true
-          prerelease: false
-
-      - name: Upload Release Asset
-        if: ${{ inputs.create_release }}
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          YTMUSICULTIMATE_VERSION: ${{ inputs.ytmusicultimate_version }}
-          YOUTUBEMUSIC_VERSION: ${{ inputs.youtubemusic_version }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/main/packages/${{ steps.build_package.outputs.package }}
-          asset_name: YTMusicUltimate_${{ env.YOUTUBEMUSIC_VERSION  }}_${{ env.YTMUSICULTIMATE_VERSION }}.ipa
-          asset_content_type: application/vnd.debian.binary-package
+          tag_name: v${{ env.YOUTUBE_VERSION }}-${{ env.UYOU_VERSION }}-(${{ github.run_number }})
+          name: v${{ env.YOUTUBE_VERSION }}-${{ env.UYOU_VERSION }}-(${{ github.run_number }})
+          files: main/packages/*.ipa
+          draft: ${{ env.DRAFT }}
