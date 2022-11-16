@@ -1,6 +1,6 @@
 ARCHS = arm64
 TARGET = iphone:clang:16.1:13.0
-PACKAGE_VERSION = 1.2.6
+PACKAGE_VERSION = 1.2.7
 
 ifeq ($(SIDELOADED),1)
 MODULES = jailed
