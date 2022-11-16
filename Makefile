@@ -11,7 +11,7 @@ BUNDLE_ID = com.google.ios.youtubemusic
 CODESIGN_IPA = 0
 
 YTMusicUltimate_IPA = ./tmp/Payload/YouTubeMusic.app
-YTMusicUltimate_FRAMEWORKS = UIKit Security Foundation CoreGraphics
+YTMusicUltimate_FRAMEWORKS = UIKit Security
 endif
 
 include $(THEOS)/makefiles/common.mk
