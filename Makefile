@@ -1,8 +1,16 @@
 ARCHS = arm64
-THEOS_DEVICE_IP = localhost -p 2222
-INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
-TARGET = iphone:clang:15.5:12.1.2
+TARGET = iphone:clang:16.1:12.1.2
 PACKAGE_VERSION = 1.2.7
+
+ifeq ($(SIDELOADED),1)
+MODULES = jailed
+DISPLAY_NAME = YouTube Music
+BUNDLE_ID = com.google.ios.youtubemusic
+CODESIGN_IPA = 0
+
+YTMusicUltimate_IPA = ./tmp/Payload/YouTubeMusic.app
+YTMusicUltimate_FRAMEWORKS = UIKit Security Foundation CoreGraphics
+endif
 
 include $(THEOS)/makefiles/common.mk
 
