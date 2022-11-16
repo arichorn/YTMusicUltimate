@@ -1,6 +1,8 @@
 ARCHS = arm64
 TARGET = iphone:clang:16.1:12.1.2
 PACKAGE_VERSION = 1.2.7
+THEOS_DEVICE_IP = localhost -p 2222
+INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
 
 ifeq ($(SIDELOADED),1)
 MODULES = jailed
