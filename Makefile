@@ -1,12 +1,15 @@
-ARCHS = arm64
 TARGET = iphone:clang:16.1:13.0
-PACKAGE_VERSION = 1.2.7
+PACKAGE_VERSION = 1.2.8
 
 ifeq ($(SIDELOADED),1)
-MODULES = jailed
 DISPLAY_NAME = YouTube Music
 BUNDLE_ID = com.google.ios.youtubemusic
 INSTALL_TARGET_PROCESSES = SpringBoard YouTubeMusic
+ARCHS = arm64
+MODULES = jailed
+YTMusicUltimate_USE_FLEX = 0
+YTMusicUltimate_USE_FISHHOOK = 0
+FINALPACKAGE = 1
 CODESIGN_IPA = 0
 
 YTMusicUltimate_FILES = Source/AVSwitching.xm Source/BackgroundPlayback.xm Source/CarPlay.xm Source/Cast.xm Source/Colours.xm Source/PlaybackRate.xm Source/PremiumStatus.xm Source/RemoveAds.xm Source/SelectableLyrics.xm Source/Settings.xm Source/Sideloading.xm Source/VolumeBar/VolumeBar.xm
@@ -22,3 +25,6 @@ YTMusicUltimate_FILES = $(shell find Source -name '*.xm' -o -name '*.x' -o -name
 YTMusicUltimate_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
+
+before-package::
+@cp -R layout/Library/Application\ Support/YTMusicUltimate.bundle Resources/
