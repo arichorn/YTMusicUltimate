@@ -8,7 +8,7 @@ on:
     inputs:
       ytmusicultimate_version:
         description: "The version of YTMusicUltimate"
-        default: "1.2.7"
+        default: "1.2.8"
         required: true
         type: string
       decrypted_youtubemusic_url:
@@ -44,13 +44,13 @@ concurrency:
 jobs:
   build:
     name: Build YTMusicUltimate IPA
-    runs-on: macos-12
+    runs-on: macos-13
     permissions:
       contents: write
 
     steps:
       - name: Checkout Main
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.2.0
         with:
           path: main
           submodules: recursive
@@ -59,7 +59,7 @@ jobs:
         run: brew install ldid dpkg
 
       - name: Setup Theos
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.2.0
         with:
           repository: theos/theos
           ref: master
@@ -84,7 +84,7 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
 
       - name: Setup Theos Jailed
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.2.0
         with:
           repository: qnblackcat/theos-jailed
           ref: master
@@ -129,7 +129,7 @@ jobs:
           APP_NAME: ${{ inputs.app_name }}
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.1
         env:
           YTMUSICULTIMATE_VERSION: ${{ inputs.ytmusicultimate_version }}
           YOUTUBEMUSIC_VERSION: ${{ inputs.youtubemusic_version }}
@@ -140,14 +140,14 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v0.1.14
+        uses: softprops/action-gh-release@v0.1.15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           YTMUSICULTIMATE_VERSION: ${{ inputs.ytmusicultimate_version }}
           YOUTUBEMUSIC_VERSION: ${{ inputs.youtubemusic_version }}
           DRAFT: ${{ inputs.create_release }}
         with:
-          tag_name: v${{ env.YOUTUBE_VERSION }}-${{ env.UYOU_VERSION }}-(${{ github.run_number }})
-          name: v${{ env.YOUTUBE_VERSION }}-${{ env.UYOU_VERSION }}-(${{ github.run_number }})
+          tag_name: v${{ env.YOUTUBE_VERSION }}-${{ env.YTMUSICULTIMATE_VERSION }}-(${{ github.run_number }})
+          name: v${{ env.YOUTUBE_VERSION }}-${{ env.YTMUSICULTIMATE_VERSION }}-(${{ github.run_number }})
           files: main/packages/*.ipa
           draft: ${{ env.DRAFT }}
