@@ -25,6 +25,3 @@ YTMusicUltimate_FILES = $(shell find Source -name '*.xm' -o -name '*.x' -o -name
 YTMusicUltimate_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
-
-before-package::$
-@cp -R layout/Library/Application\ Support/YTMusicUltimate.bundle Resources/
