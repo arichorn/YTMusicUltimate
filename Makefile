@@ -26,5 +26,5 @@ YTMusicUltimate_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
-before-package:$
+before-package::$
 @cp -R layout/Library/Application\ Support/YTMusicUltimate.bundle Resources/
