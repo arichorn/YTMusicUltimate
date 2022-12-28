@@ -1,4 +1,4 @@
-TARGET = iphone:clang:16.1:13.0
+TARGET = iphone:clang:16.2:13.0
 PACKAGE_VERSION = 1.2.8
 
 ifeq ($(SIDELOADED),1)
@@ -12,7 +12,6 @@ YTMusicUltimate_USE_FISHHOOK = 0
 FINALPACKAGE = 1
 CODESIGN_IPA = 0
 
-YTMusicUltimate_FILES = Source/AVSwitching.xm Source/BackgroundPlayback.xm Source/CarPlay.xm Source/Cast.xm Source/Colours.xm Source/PlaybackRate.xm Source/PremiumStatus.xm Source/RemoveAds.xm Source/SelectableLyrics.xm Source/Settings.xm Source/Sideloading.xm Source/VolumeBar/VolumeBar.xm
 YTMusicUltimate_IPA = ./tmp/Payload/YouTubeMusic.app
 YTMusicUltimate_FRAMEWORKS = UIKit Security Foundation CoreGraphics
 endif
