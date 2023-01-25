@@ -20,7 +20,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = YTMusicUltimate
 
-YTMusicUltimate_FILES = $(shell find Source -name '*.xm' -o -name '*.x' -o -name '*.m' -o -name '*.h')
+YTMusicUltimate_FILES = $(shell find Source -name '*.xm' -o -name '*.x' -o -name '*.m')
 YTMusicUltimate_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
