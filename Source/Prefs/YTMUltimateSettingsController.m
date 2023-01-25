@@ -1,7 +1,7 @@
 #import "YTMUltimatePrefs.h"
 #import "YTMUltimateSettingsController.h"
 
-const NSString *version = @"1.2.7";
+const NSString *version = @"1.2.8";
 
 #define LOC(x) [tweakBundle localizedStringForKey:x value:nil table:nil]
 extern NSBundle *YTMusicUltimateBundle();
@@ -14,7 +14,7 @@ extern NSBundle *YTMusicUltimateBundle();
     self.navigationItem.leftBarButtonItem = [self closeButton];
 
     UITableViewStyle style;
-    if (@available(iOS 13, *)) {
+    if (@available(iOS 14, *)) {
         style = UITableViewStyleInsetGrouped;
     } else {
         style = UITableViewStyleGrouped;
@@ -142,7 +142,7 @@ extern NSBundle *YTMusicUltimateBundle();
 - (UIBarButtonItem *)closeButton {
     UIBarButtonItem *item;
 
-    if (@available(iOS 13, *)) {
+    if (@available(iOS 14, *)) {
         item = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"xmark"] 
                             style:UIBarButtonItemStylePlain 
                             target:self 
