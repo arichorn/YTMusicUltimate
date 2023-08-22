@@ -100,7 +100,6 @@ jobs:
       - name: Prepare YouTube Music iPA
         run: |
           curl "https://raw.githubusercontent.com/Muirey03/RemoteLog/master/RemoteLog.h" --output "$THEOS/include/RemoteLog.h"
-          curl "https://github.com/ginsudev/YTMusicUltimate/releases/download/v1.3.8/com.ginsu.ytmusicultimate_1.3.8_iphoneos-arm.deb" --output "main/Source/com.ginsu.ytmusicultimate_1.3.8_iphoneos-arm.deb" 
           wget "$YOUTUBEMUSIC_URL" --no-verbose -O ./main/YouTubeMusic.ipa
           unzip -q ./main/YouTubeMusic.ipa -d ./main/tmp
           rm -rf ./main/tmp/Payload/YouTubeMusic.app/Watch
