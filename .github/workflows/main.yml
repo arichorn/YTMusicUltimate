@@ -102,12 +102,14 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Inject tweak into provided IPA
+      - name: Inject additional dylibs into provided IPA
         run: |
           brew install coreutils
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls)
           cd ${{ github.workspace }}/main
+          cp $(THEOS_OBJ_DIR)/YTMABConfig.dylib Payload/YoutubeMusic.app/Frameworks/
+          cp $(THEOS_OBJ_DIR)/ReturnYouTubeMusicDislikes.dylib Payload/YoutubeMusic.app/Frameworks/
           ./Azule/azule -i $PWD/YouTubeMusic.ipa -o $PWD/packages/YTMusicUltimate.ipa -f $PWD/packages/$tweakName
 
       - name: Remove the Watch folder
