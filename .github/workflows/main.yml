@@ -109,8 +109,8 @@ jobs:
           tweakName=$(ls)
           cd ${{ github.workspace }}/main
           ./Azule/azule -i $PWD/YouTubeMusic.ipa -o $PWD/packages/YTMusicUltimate.ipa -f $PWD/packages/$tweakName 
-          cp ${{ github.workspace }}/Tweaks/YTMABConfig/.theos/_/obj/YTMABConfig.dylib $PWD/packages/YTMusicUltimate.app/Frameworks/YTMABConfig.dylib
-          cp ${{ github.workspace }}/Tweaks/Return-YouTube-Music-Dislikes/.theos/_/obj/ReturnYouTubeMusicDislikes.dylib $PWD/packages/YTMusicUltimate.app/Frameworks/ReturnYouTubeMusicDislikes.dylib
+          cp ${{ github.workspace }}/Tweaks/YTMABConfig/.theos/obj/YTMABConfig.dylib $PWD/packages/YTMusicUltimate.app/Frameworks/YTMABConfig.dylib
+          cp ${{ github.workspace }}/Tweaks/Return-YouTube-Music-Dislikes/.theos/obj/ReturnYouTubeMusicDislikes.dylib $PWD/packages/YTMusicUltimate.app/Frameworks/ReturnYouTubeMusicDislikes.dylib
 
       - name: Remove the Watch folder
         run: |
