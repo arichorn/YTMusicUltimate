@@ -47,7 +47,7 @@ jobs:
       
       - name: SDK Caching
         id: SDK
-        uses: actions/cache@v4.0.1
+        uses: actions/cache@v4.0.2
         env:
           cache-name: iOS-16.4-SDK
         with:
@@ -107,9 +107,9 @@ jobs:
           brew install coreutils
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls)
-          cd ${{ github.workspace }}/main
-          cp $(THEOS_OBJ_DIR)/YTMABConfig.dylib Payload/YoutubeMusic.app/Frameworks/
-          cp $(THEOS_OBJ_DIR)/ReturnYouTubeMusicDislikes.dylib Payload/YoutubeMusic.app/Frameworks/
+          cd ${{ github.workspace }}/main/.theos/obj/install/Library/Frameworks
+          cp $(THEOS_OBJ_DIR)/YTMABConfig.dylib Payload/YoutubeMusic.app
+          cp $(THEOS_OBJ_DIR)/ReturnYouTubeMusicDislikes.dylib Payload/YoutubeMusic.app
           ./Azule/azule -i $PWD/YouTubeMusic.ipa -o $PWD/packages/YTMusicUltimate.ipa -f $PWD/packages/$tweakName
 
       - name: Remove the Watch folder
