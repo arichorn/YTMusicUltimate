@@ -108,7 +108,7 @@ jobs:
           cd ${{ github.workspace }}/main/packages
           tweakName=$(ls)
           cd ${{ github.workspace }}/main
-          ./Azule/azule -i $PWD/YouTubeMusic.ipa -o $PWD/packages/YTMusicUltimate.ipa -f $PWD/packages/$tweakName -f $THEOS/obj/YTMABConfig.dylib -f $THEOS/obj/ReturnYouTubeMusicDislikes.dylib
+          ./Azule/azule -i $PWD/YouTubeMusic.ipa -o $PWD/packages/YTMusicUltimate.ipa -f $PWD/packages/$tweakName --dylibs YTMABConfig.dylib, ReturnYouTubeMusicDislikes.dylib
 
       - name: Remove the Watch folder
         run: |
